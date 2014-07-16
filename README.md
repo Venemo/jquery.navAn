@@ -1,7 +1,7 @@
 jQuery navigation animation plugin
 ==================================
 
-jQuery.navAn is a plugin allows you to do partial page loads via AJAX while modifying the displayed URL and animating the result.
+jQuery.navAn is a plugin that allows you to do partial page loads via AJAX while modifying the displayed URL and animating the result.
 To this end, the HTML 5 history API is used. If it's not available, it will fallback to full-page reloads.
 Animations are implemented with CSS transitions and are fully customizable. When they're not available, no animation will happen.
 
