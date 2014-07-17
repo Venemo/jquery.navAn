@@ -72,7 +72,11 @@ Number of milliseconds after which the plugin can safely remove an element, ie. 
 * `pattern`
 Pattern that tells how to perform the navigation animation. See below for more details about patterns.
 * `backPattern`
-Pattern that tells how to perform the navigation animation when going backwards. See below for more details about patterns.
+Pattern that tells how to perform the navigation animation when going backwards (ie. when the user presses the back button in the browser). See below for more details about patterns. This is not applicable if `usePushState` is `false`.
+* `usePushState` (default true)
+Tells whether or not to use the HTML5 history API. When false, there will not be an option to go back to a previous state.
+* `disallowSameUrl` (default true)
+Tells whether to allow loading the same URL as the browser window is on.
 
 ### Options for navigation
 
@@ -88,16 +92,46 @@ nav.navigate(url, {
 
 * `title`
 The title to pass to pushState. If not specified, the defaultTitle above is used.
-* `load`
-Can override the `load` parameter of the initialization.
-* `pattern`
-Can override the `pattern` parameter of the initialization. See below for more details about patterns.
-* `backPattern`
-Can override the `backPattern` parameter of the initialization. See below for more details about patterns.
+* `load`, `pattern`, `backPattern`
+These can override the parameters specified in the initialization call to `navAn()`, just for this particular operation.
 
 ### Examples of customization
 
-Coming soon. Stay tuned!
+#### Patterns
+
+An example pattern looks like this:
+
+```javascript
+var myPattern = {
+        oldItem: {
+            start: {
+                translateX: 0,
+                scale: 1
+            },
+            end: {
+                translateX: -1000,
+                scale: 0.7
+            }
+        },
+        newItem: {
+            start: {
+                translateX: 1000,
+                scale: 0.7
+            },
+            end: {
+                translateX: 0,
+                scale: 1
+            }
+        }
+    };
+```
+
+It contains possible CSS transforms that will be applied.
+
+* `oldItem.start` is applied to the old item (the one that is animated out) before the transition starts
+* `newItem.start` is applied to the new item (the one that is animated in) before the transition starts
+* `oldItem.end` is applied to the old item for the transition
+* `newItem.end` is applied to the old item for the transition
 
 #### Integration with existing infrastructure
 
