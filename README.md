@@ -135,6 +135,6 @@ It contains possible CSS transforms that will be applied.
 
 #### Integration with existing infrastructure
 
-If you want to integrate this plugin with you existing infrastructure (for example, your own server or your javascript templating),
+If you want to integrate this plugin with your existing infrastructure (for example, your own server or your javascript templating),
 you can do it by specifying the `load` parameter. In that parameter, you can pass in a function which downloads content from your service
 and performs the templating.
