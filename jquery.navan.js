@@ -165,6 +165,7 @@
             $this.css("overflow", "hidden");
             $this.height(Math.max($old.outerHeight(), $new.outerHeight()));
 
+            // This function will set the start state of each DOM element
             var setStartState = function () {
                 // Apply pattern start for old item
                 var transformStartForOldStr = buildCssTransform(pattern.oldItem.start);
@@ -186,11 +187,13 @@
                 });
             };
 
+            // This function will set the CSS transition duration on each element
             var setTransitionDuration = function () {
                 $old.css("transition-duration", transitionDurationStr);
                 $new.css("transition-duration", transitionDurationStr);
             };
 
+            // This function will set the end state of each DOM element
             var setEndState = function () {
                 // Apply pattern end state for old item
                 var transformEndForOldStr = buildCssTransform(pattern.oldItem.end);
@@ -220,6 +223,12 @@
                 animationNextState(function () {
                     // Set end state transition
                     setEndState();
+
+                    animationNextState(function () {
+                        // Callback for when the animation has started
+                        options.animationStarted && options.animationStarted($old, $new);
+                    });
+
                     // Wait for transition to finish
                     setTimeout(function () {
                         // Remove old element entirely
@@ -235,7 +244,8 @@
                         $this.css("overflow", "hidden");
                         $this.height($new.outerHeight());
 
-                        options.animationCompleted && options.animationCompleted();
+                        // Callback for when the animation has ended
+                        options.animationCompleted && options.animationCompleted($old, $new);
                     }, options.animationDuration + 100);
                 });
             });
